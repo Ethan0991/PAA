@@ -9,6 +9,11 @@ import java.util.Scanner;
 import ProjetDebat.graphe.Argument;
 import ProjetDebat.graphe.*;
 
+/**
+ * Classe qui permet la construction d'un débat à partir d'un fichier
+ *
+ * @author Ethan & Lathan
+ */
 public class FichierDebat {
 
 	private String contenu ;
@@ -16,11 +21,19 @@ public class FichierDebat {
 	private Graphe grapheArg;
 	private String caracSpeciaux = "(),";
 	
+    /**
+     * Permet de construire un objet FichierDebat avec le nom fichier passé en paramètre
+     *
+     * @param nameFile est le chemin vers le fichier
+     */
 	public FichierDebat(String nameFile) {
 		this.nameFile=nameFile;
 		grapheArg = new Graphe();
 	}
 	
+    /**
+     * permet le lire le contenu du fichier créer à partir de nameFile et place son contenu dans l'attribut privé contenu
+     */
 	public void lireFichier() {
 		
 		StringBuffer lecture = new StringBuffer();
@@ -44,6 +57,9 @@ public class FichierDebat {
 		contenu = lecture.toString();
 	}
 	
+    /**
+     * permet de créer un graphe à partir du contenu du fichier
+     */
 	public void creerGrapheFichier() {
 		
 		Scanner scanner = new Scanner(contenu);
@@ -220,12 +236,19 @@ public class FichierDebat {
 	}
 	
 	
+    /**
+     * permet d'ajouter dans le graphe l'argument passé en paramètre
+     */
 	public void ajouterArg(Argument A) {
 		grapheArg.ajouterNoeud(A);
 		//System.out.println(grapheArg.toString());
 		
 	}
 	
+    /**
+     * permet d'ajouter une contraction dans le graphe
+     * en vérifiant qu'il n'y pas d'erreur entre l'argument qui contredit et l'argument qui est contredit
+     */
 	public void ajouterContradiction(Argument A1, Argument A2) {
 		try {
 			if (!(grapheArg.getGraphe().keySet().contains(A1)) || !(grapheArg.getGraphe().keySet().contains(A2)) ) {
@@ -240,12 +263,20 @@ public class FichierDebat {
 	}
 	
 	
-	
+    /**
+     * permet de retourner l'attribut privé contenu
+     *
+     * @return contenu est le contenu du fichier
+    */
 	public String getContenu() {
 		return contenu;
 	}
 
-
+    /**
+     * permet de retourner l'attribut privé grapheArg
+     *
+     * @return grapheArg est le graphe créer à partir du fichier
+     */
 	public Graphe getGrapheArg() {
 		return grapheArg;
 	}

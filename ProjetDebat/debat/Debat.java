@@ -18,12 +18,13 @@ import java.util.Set;
 import up.mi.jgm.td1corrige.ExceptionMenu;
 
 
-
+/**
+ * Classe qui permet la construction d'un débat
+ *
+ * @author Ethan & Lathan
+ */
 public class Debat {
 
-	/**
-	 * Classe qui permet la construction d'un débat
-	 */
 	
 	private List<Argument> listArguments ;
 	private Graphe grapheArg ;
@@ -34,13 +35,13 @@ public class Debat {
 	private String cheminFichier = "";
 	private Set<Argument> derniereSolution = null ;
 	
-	// Dans le cas ou on veut rentrer d'autres noms pour les args
-	/**
-	 * Construit un débat en fonction d'une liste passée en paramètre
-	 * Version 1:	permet de choisir vos propres noms pour les arguments
-	 * 
-	 * @param listArgument est une liste regroupant l'ensemble des arguments utlisés dans ce débat
-	 */
+    // Dans le cas ou on veut rentrer d'autres noms pour les args
+    /**
+     * Construit un débat en fonction d'une liste passée en paramètre
+     * Version 1:    permet de choisir vos propres noms pour les arguments
+     *
+     * @param listArgument est une liste regroupant l'ensemble des arguments utlisés dans ce débat
+     */
 	public Debat(List<Argument> listArguments) {
 		
 		this.listArguments = listArguments;
@@ -48,7 +49,13 @@ public class Debat {
 		solutionPotentielle = new HashSet<Argument>();
 	}
 	
-	
+    // Dans le cas où on a un graphe de départ
+    /**
+    * Construit un débat en fonction d'un graphe passé en paramètre
+    * Version 2:le nom des arguments provient de du graphe passé en paramètre
+    *
+    * @param grapheArg est un graphe à partir duquel nous allons construire un débat
+    */
 	public Debat(Graphe grapheArg) {
 		
 		this.listArguments = new ArrayList<Argument>(grapheArg.getGraphe().keySet());
@@ -58,14 +65,14 @@ public class Debat {
 		solutionPotentielle = new HashSet<Argument>();
 	}
 	
-	// Dans le cas ou on initialise A1,A2,AN automatiquement
-	/**
-	 * Construit un débat en fonction d'un nombre en paramètre
-	 * Version 2:	le nom des arguments est choisi automatiquement A1,A2...,AN
-	 * 
-	 * @param nbArg est un nombre correspondant à l'ensemble des arguments utlisés dans ce débat
-	 */
-	public Debat(int nbArg) {
+    // Dans le cas ou on initialise A1,A2,AN automatiquement
+    /**
+    * Construit un débat en fonction d'un nombre en paramètre
+    * Version 3:    le nom des arguments est choisi automatiquement A1,A2...,AN
+    *
+    * @param nbArg est un nombre correspondant à l'ensemble des arguments utlisés dans ce débat
+    */
+    public Debat(int nbArg) {
 		
 		this.nbArg=nbArg;
 		listArguments = new ArrayList<Argument>();
@@ -161,7 +168,9 @@ public class Debat {
 	}
 
 	/**
-	 * Permet à l'utilisateur de choisir d'insérer une contraction dans le débat 
+	 * Permet à l'utilisateur de choisir d'insérer une contraction dans le débat
+     *
+     *@param sc un objet de type scanner pour recevoir les input de l'utilisateur
 	 */
 	private void ajouterContradiction(Scanner sc) {
 
@@ -221,6 +230,7 @@ public class Debat {
 	
 	/**
 	 *	Dresse la liste des arguments
+     *
 	 *@param listArguments liste des arguments du débat 
 	 */
 	public void afficheArguments(List <Argument> listArguments) {
@@ -292,7 +302,11 @@ public class Debat {
 				//sc.close();
 	}
 
-
+    /**
+     * Fonction qui laisse à l'utlisateur le choix de l'interface graphique et présente le menu des solutions ainsi que de permettre à l'utlisateur de chosir une des options disponibles
+     *
+     *@param affichageGraphique est un boolean servant à conserver le choix de l'utlisateur
+     */
 	public void affichageMenuRechercheSolution(boolean affichageGraphique) {
 		Scanner sc = new Scanner(System.in);
 		this.rs = new RechercheSolution(grapheArg);

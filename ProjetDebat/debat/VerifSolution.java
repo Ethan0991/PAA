@@ -15,8 +15,9 @@ import ProjetDebat.graphe.Graphe;
 /**
  * Classe permettant la vérification d'une solution potentielle
  * Contient en paramètre tous les ensembles nécessaires à cette vérification
+ *
+ * @author Ethan & Lathan
  */
-
 public class VerifSolution {
 
 	private Set <Argument> argContreditsParSp ;
@@ -25,8 +26,14 @@ public class VerifSolution {
 	private boolean supressStdout ;
 
 
-	
-
+    /**
+    * permet de créer un objet VerifSolution à partir d'une liste de solution potentielle
+    *                                          et d'un graphe passé en paramètre
+    *
+    *  @param solutionPotentielle est une liste d'argument contenant les solutions à tester
+    *  @param grapheArg est le graphe d'argument du débat
+    *
+    */
 	public VerifSolution(Set<Argument> solutionPotentielle, Graphe grapheArg) {
 		
 		
@@ -36,6 +43,14 @@ public class VerifSolution {
 		supressStdout = false;
 	}
 	
+    /**
+    * permet de créer un objet VerifSolution à partir d'une liste de solution potentielle,d'un graphe     passé
+    *                                                   et d'un booléen paramètre supressStdout
+    *
+    * @param solutionPotentielle est une liste d'argument contenant les solutions à tester
+    * @param grapheArg est le graphe d'argument du débat
+    * @param supressStdout est un booléan qui va servir à vérifer si il existe une contracdiction interne
+    */
 	public VerifSolution(Set<Argument> solutionPotentielle, Graphe grapheArg,boolean supressStdout) {
 		
 		
@@ -70,8 +85,12 @@ public class VerifSolution {
 		return argDefendus;
 	}
 	
-	
-	
+    /**
+    * permet de vérifer si il existe une contraction interne pour chaque argument de la liste des solutions potentielles
+    *
+    * @return true en l'abscence de contraction interne
+    * @return false en présence de contraction interne
+    */
 	private boolean verifContradictionInterne() {
 		
 		for (Argument arg : solutionPotentielle) {
@@ -93,7 +112,14 @@ public class VerifSolution {
 
 	}
 	
-	
+    /**
+    * permet de vérifer si pour chaque argument de la liste des solutions potentielles,
+    *                            il n'exite aucun autre arguments contredisant l'argument
+    *
+    * @return true si l'argument de la solution potentielle n'est contredit par aucun des autres arguments
+    *                    ou si cet argument est bien défendu contre les autres arguments
+    * @return false si l'argument de la solution potentielle est contredit par un autre argument
+    */
 	private boolean verifArgDefendu() {
 		Set <Argument> allArgumentsContredits = new HashSet<Argument>();
 		Set <Argument> allArgumentsExceptSolutionPotentielle = new HashSet<Argument>();
@@ -136,11 +162,20 @@ public class VerifSolution {
 	}
 	
 	
-	
+    /**
+    * permet de changer l'attribut solutionPotentitelle par argument passé en paramètre
+    *
+    */
 	public void setSolutionPotentielle(Set<Argument> solutionPotentielle) {
 		this.solutionPotentielle = solutionPotentielle;
 	}
 
+    /**
+    * permet de vérifer si pour chaque argument de la liste des solutions admissibles,
+    *                            il remplit les critèrres pour être une solution préférée
+    * @return true si la liste contient des solutions préférées
+    * @return false si si la liste ne contient pas des solutions préférées
+    */
 	public boolean verifSolutionPrefere(List<HashSet<Argument>> listeSolutionAdmissible) {
 
 		List<HashSet<Argument>> listeSolutionAdmissibleExceptSolPot = new ArrayList<HashSet<Argument>>(listeSolutionAdmissible);

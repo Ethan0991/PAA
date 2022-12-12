@@ -1,12 +1,12 @@
 package ProjetDebat.graphe;
 
 
-
+/**
+ * Modélise un argument avec son nom et son numéro unique
+ *
+ * @author Ethan & Lathan
+ */
 public class Argument implements Comparable<Argument> {
-	
-	/** 
-	 * Modélise un argument avec son nom et son numéro unique 
-	 */
 	
 	private static int numArg=0 ;
 	
@@ -52,6 +52,11 @@ public class Argument implements Comparable<Argument> {
 		return num;
 	}
 
+    /**
+    * permet de retoruner l'aatribut privé nom
+    *
+    * @return nom est le nom que porte l'argument
+    */
 	public String getNom() {
 		return nom;
 	}

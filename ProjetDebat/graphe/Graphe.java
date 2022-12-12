@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-
+/**
+ * Classe qui represente un graphe à l'aide d'une HashMap
+ *
+ * @author Ethan & Lathan
+ */
 public class Graphe {
-	
-	/**
-	 * Classe qui represente un graphe à l'aide d'une HashMap
-	 *
-	 */
 	
 	private Map <Argument,ArrayList<Argument>> graphe;
 
@@ -66,6 +65,13 @@ public class Graphe {
 		}
 	}
 	
+    /**
+     * recherche dans le graphe si un des argumets porte le même nom que celui passé en paramètre
+     *
+     * @param nomArg est le nom avec lequel la recherche d'argument va être faite
+     * @return arg si un argument portant le nomArg a été trouvé
+     *           null et affiche un message si aucun argument ne porte le nomArg
+     */
 	public Argument trouverArgNom(String nomArg) {
 		
 		for (Argument arg : graphe.keySet()) {
@@ -77,6 +83,10 @@ public class Graphe {
 		return null;
 	}
 	
+    @Override
+    /**
+     * permet de personnalisé l'affiche pour un objet de type graphe
+     */
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		for (Argument arg : graphe.keySet()) {
@@ -92,6 +102,11 @@ public class Graphe {
 		
 	}
 
+    /**
+     * Permet de retourner l'attribut privé graphe
+     *
+     * @return graphe est le graphe assoscié au débat
+     */
 	public Map<Argument, ArrayList<Argument>> getGraphe() {
 		return graphe;
 	}

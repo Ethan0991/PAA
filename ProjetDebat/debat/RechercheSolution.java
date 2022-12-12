@@ -9,6 +9,12 @@ import ProjetDebat.graphe.Argument;
 import ProjetDebat.graphe.Graphe;
 import ProjetDebat.util.*;
 
+/**
+ * Classe permettant la recherche d'une solution
+ * Contient en paramètre tous les ensembles nécessaires à cette recherche
+ *
+ * @author Ethan & Lathan
+ */
 public class RechercheSolution {
 
 	private Graphe grapheArg;
@@ -19,6 +25,11 @@ public class RechercheSolution {
 	private int cptSolPreferee = 0;
 	private VerifSolution vf;
 	
+    /**
+    * Construit une classe recherche en fonction d'un graphe passé en paramètre
+    *
+    * @param grapheArg est un graphe à partir duquel faire la recherche de solution
+    */
 	public RechercheSolution(Graphe grapheArg) {
 		
 		this.grapheArg = grapheArg;
@@ -28,6 +39,10 @@ public class RechercheSolution {
 		vf = new VerifSolution(null, grapheArg,true);
 	}
 	
+    /**
+    * Construit une liste de solution admissible
+    * en vérifiant que chacun des arguments respectent les conditions d'une solution admissible
+    */
 	public void construireListeSolutionAdmissible() {
 		HashSet<Argument> ensSolutionPotentielle ;
 		
@@ -40,6 +55,11 @@ public class RechercheSolution {
 			}
 		}
 	}
+    
+    /**
+    * Construit une liste de solution préféree
+    * en vérifiant que chacun des arguments respectent les conditions d'une solution préférée
+    */
 	public void construireListeSolutionPrefere() {
 		
 
@@ -52,6 +72,12 @@ public class RechercheSolution {
 			}
 		}
 	}
+    
+    /**
+    *  permet de retoruner une solution admissible de la liste des solutions admissibles
+    *
+    * @return listeSolutionsAdmissible.get(cptSolAdmissible++) qui est un argument admissible de listeSolutionsAdmissible
+    */
 	public Set<Argument> getAdmissible() {
 
 		if (cptSolAdmissible == listeSolutionsAdmissible.size()) {
@@ -61,6 +87,12 @@ public class RechercheSolution {
 		return listeSolutionsAdmissible.get(cptSolAdmissible++);
 		
 	}
+    
+    /**
+    *  permet de retoruner une solution préférée de la liste des solutions admissibles
+    *
+    * @return listeSolutionsPreferee.get(cptSolPreferee++) qui est un argument préférée de listeSolutionsPreferee
+    */
 	public Set<Argument> getPreferee() {
 
 		if (cptSolPreferee == listeSolutionsPreferee.size()) {
@@ -71,6 +103,9 @@ public class RechercheSolution {
 		
 	}
 	
+    /**
+     * Permet de construire la liste de combinaison à partir de listeSousCombinaisonsArguments
+     */
 	public void construireListeCombinaisons() {
 		ArrayList<Argument> listArguments = new ArrayList<>();
 		ArrayList<Argument> listeCombinaison = new ArrayList<>();
@@ -88,10 +123,19 @@ public class RechercheSolution {
 		
 	}
 
+    /**
+     * permet de retourner l'attribut privé listeCombinaisonsArguments
+     *
+     * @return listeCombinaisonsArguments est une liste contenant des arguments pouvant être des solutions admissibles
+     */
 	public ArrayList<ArrayList<Argument>> getListeCombinaisonsArguments() {
 		return listeCombinaisonsArguments;
 	}
 	
+    /**
+    * Permet d'affichier à l'utilisateur l'ensemble des solutions admissibles à partir de listeSolutionsAdmissible
+    *
+    */
 	public void afficheListeSolutionAdmissible() {
 		int cpt=1;
 		for (HashSet<Argument> solutionAdmissible : listeSolutionsAdmissible) {
@@ -99,6 +143,11 @@ public class RechercheSolution {
 			cpt++;
 		}
 	}
+    
+    /**
+    * Permet d'affichier à l'utilisateur l'ensemble des solutions préférées à partir de listeSolutionsAdmissible
+    *
+    */
 	public void afficheListeSolutionPreferee() {
 		int cpt=1;
 		for (HashSet<Argument> solutionAdmissible : listeSolutionsPreferee) {

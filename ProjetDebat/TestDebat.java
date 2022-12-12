@@ -7,6 +7,11 @@ import ProjetDebat.graphique.*;
 import ProjetDebat.debat.*;
 import ProjetDebat.file.*;
 
+/**
+ * Classe principal permettant de tester la création d'un débat à partir d'un fichier ou automatiquement 
+ *
+ * @author Ethan & Lathan
+ */
 public class TestDebat {
 
 	public static void main(String[] args) {

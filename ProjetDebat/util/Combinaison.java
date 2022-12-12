@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 import ProjetDebat.graphe.Argument;
 
+/** 
+ * Classe qui va nous servir à créer l'ensemble de la liste de sous arguments dans la classe RechercheSolution
+ *
+ * @author Ethan & Lathan
+*/
+
 public class Combinaison {
 
 
