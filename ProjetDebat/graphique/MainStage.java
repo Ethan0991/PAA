@@ -1,7 +1,6 @@
 package ProjetDebat.graphique;
 
 import javafx.scene.paint.*;
-import ProjetDebat.debat.Debat;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -14,7 +13,6 @@ public class MainStage extends Application{
 	private double screenHeight;
 	private Scene scene;
 	private Pane paneMenu;
-	private Debat debat ;
 	
 	private static ControllerDebat controller;
 

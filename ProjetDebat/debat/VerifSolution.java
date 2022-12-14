@@ -1,14 +1,9 @@
 package ProjetDebat.debat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import javax.net.ssl.CertPathTrustManagerParameters;
-
 import ProjetDebat.graphe.Argument;
 import ProjetDebat.graphe.Graphe;
 

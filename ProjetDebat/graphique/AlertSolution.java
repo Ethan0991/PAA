@@ -24,12 +24,10 @@ public class AlertSolution  {
 	public Set<Argument> setSolutionAdmissible(Set<Argument> derniereSolution) {
 		alert.setHeaderText("Une solution admissible est :");
 		derniereSolution = debat.getRs().getAdmissible();
-		System.out.println("la derniere sol est : "+derniereSolution);
 		alert.setContentText(derniereSolution.toString());
 		return derniereSolution;
 	}
 	public Set<Argument> setSolutionPrefere(Set<Argument> derniereSolution) {
-		System.out.println("la derniere sol est : "+derniereSolution);
 		alert.setHeaderText("Une solution préféree est :");
 		derniereSolution = debat.getRs().getPreferee();
 		alert.setContentText(derniereSolution.toString());

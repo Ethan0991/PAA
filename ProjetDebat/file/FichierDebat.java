@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-import ProjetDebat.graphe.Argument;
 import ProjetDebat.graphe.*;
 
 /**
@@ -19,7 +18,6 @@ public class FichierDebat {
 	private String contenu ;
 	private String nameFile;
 	private Graphe grapheArg;
-	private String caracSpeciaux = "(),";
 	
     /**
      * Permet de construire un objet FichierDebat avec le nom fichier passé en paramètre

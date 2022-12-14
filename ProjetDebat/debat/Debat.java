@@ -1,6 +1,5 @@
 package ProjetDebat.debat;
 
-import ProjetDebat.graphe.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,14 +13,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-
+import ProjetDebat.graphe.*;
 import up.mi.jgm.td1corrige.ExceptionMenu;
 
 
 /**
  * Classe qui permet la construction d'un débat
  *
- * @author Ethan & Lathan
  */
 public class Debat {
 
@@ -68,7 +66,7 @@ public class Debat {
     // Dans le cas ou on initialise A1,A2,AN automatiquement
     /**
     * Construit un débat en fonction d'un nombre en paramètre
-    * Version 3:    le nom des arguments est choisi automatiquement A1,A2...,AN
+    * Version 3:    le nom des arguments est choisi automatiquement A1,A2,...,AN
     *
     * @param nbArg est un nombre correspondant à l'ensemble des arguments utlisés dans ce débat
     */
@@ -90,9 +88,9 @@ public class Debat {
 	 * 
 	 * @return nbArg est un nombre correspondant à l'ensemble des arguments utlisés dans ce débat
 	 */
-	public static int demanderNombreArgument() {
+	public static int demanderNombreArgument(Scanner sc) {
 		
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
 		System.out.print("Entrez le nombre d'arguments : \n--> : ");
 		int nbArg = 0;
 		boolean condition = true;
@@ -121,9 +119,8 @@ public class Debat {
 	 * Affichage du 1er menu permettant de construire le débat
 	 */
 	
-	public void affichageMenuContradiction() {
+	public void affichageMenuContradiction(Scanner sc) {
 		
-		Scanner sc = new Scanner(System.in);
 		
 		int choix =0 ;
 
@@ -172,7 +169,7 @@ public class Debat {
      *
      *@param sc un objet de type scanner pour recevoir les input de l'utilisateur
 	 */
-	private void ajouterContradiction(Scanner sc) {
+	public void ajouterContradiction(Scanner sc) {
 
 		int choix = -1;
 		boolean sortie = false;
@@ -318,6 +315,7 @@ public class Debat {
 		boolean choix_possible = false;
 		int cptArg =0;
 		if (affichageGraphique) {
+			sc.close();
 			return ;
 		}
 		
@@ -418,7 +416,7 @@ public class Debat {
 				
 			
 			} while (choix != 4);
-				//sc.close();
+				sc.close();
 	}
 
 
@@ -480,7 +478,6 @@ public class Debat {
 			do {
 				try {
 					
-					int cpt =1;
 					System.out.print("\nChoisissez l'argument à retirer de la solution :\n\n");
 					List<Argument> listArgSp = new ArrayList<Argument>();
 					
