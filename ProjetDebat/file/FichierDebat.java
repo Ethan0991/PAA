@@ -47,10 +47,12 @@ public class FichierDebat {
 		}
 		
 		catch (FileNotFoundException e) {
-			System.out.print("Fichier non trouvé");
+			System.out.print("Fichier non trouvé.\nFin du programme");
+			System.exit(0);
 		}
 		catch (IOException e) {
-			System.out.print("Erreur IOException");
+			System.out.print("Erreur IOException.\nFin du programme");
+			System.exit(0);
 		}
 		contenu = lecture.toString();
 	}
@@ -92,7 +94,12 @@ public class FichierDebat {
 							}
 						}catch (ExceptionFileDebat e) {
 							System.out.println(e.getMessage());
-						}catch (IndexOutOfBoundsException e) {}
+							System.exit(0);
+						}catch (IndexOutOfBoundsException e) {
+							System.out.println("Erreur Fichier lecture.\nFin du programme.");
+							System.exit(0);
+						}
+						
 						
 						
 						lireArgument = false;
@@ -255,6 +262,7 @@ public class FichierDebat {
 			}
 		} catch (ExceptionFileDebat e) {
 			System.out.println(e.getMessage());
+			System.exit(0);
 		}
 
 		grapheArg.ajouterArc(A1, A2);

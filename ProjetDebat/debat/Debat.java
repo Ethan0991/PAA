@@ -14,6 +14,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import ProjetDebat.graphe.*;
+import ProjetDebat.solution.*;
 import up.mi.jgm.td1corrige.ExceptionMenu;
 
 
@@ -90,7 +91,6 @@ public class Debat {
 	 */
 	public static int demanderNombreArgument(Scanner sc) {
 		
-		//Scanner sc = new Scanner(System.in);
 		System.out.print("Entrez le nombre d'arguments : \n--> : ");
 		int nbArg = 0;
 		boolean condition = true;
@@ -98,7 +98,7 @@ public class Debat {
 			try {
 				nbArg = sc.nextInt();
 				if (nbArg<=0) {
-					throw new ExceptionDebat("\nEntrez un nombre d'arguments supérieur ou égale à 0.\n--> : ");
+					throw new ExceptionDebat("\nEntrez un nombre d'arguments supérieur ou égale à 1.\n--> : ");
 				}
 				condition = false;
 				
@@ -242,8 +242,8 @@ public class Debat {
 	/**
 	 *	Menu qui va permettre de construire la solution admissible du débat et de vérifier si celle-ci est correcte
 	 */
-	public void affichageMenuSolution() {
-		Scanner sc = new Scanner(System.in);
+	public void affichageMenuSolution(Scanner sc) {
+
 		VerifSolution verif = new VerifSolution(solutionPotentielle, grapheArg);
 		int choix =0 ;
 
@@ -304,8 +304,8 @@ public class Debat {
      *
      *@param affichageGraphique est un boolean servant à conserver le choix de l'utlisateur
      */
-	public void affichageMenuRechercheSolution(boolean affichageGraphique) {
-		Scanner sc = new Scanner(System.in);
+	public void affichageMenuRechercheSolution(Scanner sc,boolean affichageGraphique) {
+
 		this.rs = new RechercheSolution(grapheArg);
 		rs.construireListeCombinaisons();
 		rs.construireListeSolutionAdmissible();
@@ -398,10 +398,9 @@ public class Debat {
 							
 							break;
 						
-						case 4:
-							System.exit(0);
-							
-							break;
+						case 4:		
+							System.out.println("\nFin du programme.");
+							return;
 						}
 					
 				} catch (ExceptionMenu e) {
@@ -410,7 +409,7 @@ public class Debat {
 					System.out.println(e.getMessage());
 				}
 				  catch (InputMismatchException e) {
-					System.out.println("Erreur, veuillez entrer un entier\n");
+					System.out.println("Erreur, veuillez entrer un entier \n");
 					sc.nextLine();
 				}
 				
@@ -439,7 +438,6 @@ public class Debat {
 					afficheArguments(this.listArguments);
 					System.out.print("\n\n--> : ");
 					choix = sc.nextInt();
-					sc.nextLine();
 					A = listArguments.get(choix-1);
 					if (solutionPotentielle.contains(A)) {
 						System.out.println("\nL'argument est déjà dans la solution proposée.");
@@ -451,7 +449,15 @@ public class Debat {
 				}
 				catch (IllegalArgumentException e) {
 					sc.nextLine();
-					System.out.println("\nVeuillez entrer un entier.\n");
+					System.out.println("\nErreur, Veuillez entrer un entier.\n");
+				}
+				catch (IndexOutOfBoundsException e) {
+					sc.nextLine();
+					System.out.println("\nVeuillez entrer un entier positif.");
+				}
+				catch (InputMismatchException e) {
+					sc.nextLine();
+					System.out.println("\nErreur, Veuillez entrer un entier.\n");
 				}
 			} while (!sortie);
 		} else {
@@ -487,8 +493,7 @@ public class Debat {
 					Collections.sort(listArgSp);
 					afficheArguments(listArgSp);
 					System.out.print("\n\n--> : ");
-					choix = sc.nextInt();
-					sc.nextLine();
+					choix = sc.nextInt(); 
 					A = listArgSp.get(choix-1);
 					if (choix > solutionPotentielle.size() || choix<=0 ) {
 						throw new ExceptionDebat("\nEntrez un choix correct.\n");
@@ -500,10 +505,21 @@ public class Debat {
 				}
 				catch (ExceptionDebat e) {
 					System.out.println(e.getMessage());
+					
 				}
 				catch (IllegalArgumentException e) {
+					System.out.println("entree");
 					sc.nextLine();
-					System.out.println("\nVeuillez entrer un entier.\n");
+					System.out.println("\nVeuillez entrer un entier.");
+					System.out.println("sortie : "+sortie);
+				}
+				catch (IndexOutOfBoundsException e) {
+					sc.nextLine();
+					System.out.println("\nVeuillez entrer un entier positif.");
+				}
+				catch (InputMismatchException e) {
+					sc.nextLine();
+					System.out.println("\nErreur, Veuillez entrer un entier.\n");
 				}
 				
 			} while (!sortie);

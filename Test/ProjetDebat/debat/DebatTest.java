@@ -80,5 +80,6 @@ class DebatTest {
 		debatFile.affichageMenuRechercheSolution(scanner,false);
 		debatFile.getRs();
 	}
+	
 
 }

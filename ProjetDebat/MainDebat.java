@@ -19,18 +19,21 @@ public class MainDebat {
 		Scanner scanner = new Scanner(System.in);
 		char choix ='0' ;
 		boolean affichageGraphique = false;
-		do {
-			try {
-
-				System.out.print("Interface Graphique ? (Y/N)\n--> : ");
-				choix = scanner.next().charAt(0);
-			} catch (IllegalArgumentException e) {
-				System.out.println("\nErreur, veuillez entrer Y ou N.");
-			}
-		} while (choix != 'Y' && choix != 'N');
+		
 		
 		if (args.length>0) {
-			System.out.println("Le graphe a été généré à partir du fichier entré en paramètre :\n");
+			
+			do {
+				try {
+
+					System.out.print("Interface Graphique ? (Y/N)\n--> : ");
+					choix = scanner.next().charAt(0);
+				} catch (IllegalArgumentException e) {
+					System.out.println("\nErreur, veuillez entrer Y ou N.");
+				}
+			} while (choix != 'Y' && choix != 'N');
+			
+			System.out.println("Le graphe est généré à partir du fichier entré en paramètre :\n");
 			System.out.println(args[0]+"\n");
 			FichierDebat fd = new FichierDebat(args[0]);
 			fd.lireFichier();
@@ -40,10 +43,10 @@ public class MainDebat {
 			if (choix == 'Y') {
 				affichageGraphique = true;
 			}
-			debat.affichageMenuRechercheSolution(affichageGraphique);
+			debat.affichageMenuRechercheSolution(scanner,affichageGraphique);
 			
 			if (choix == 'Y') {
-				DebatGraphique.launchGraphique(args, debat);
+				DebatGraphique.launchGraphique(debat);
 
 			}
 			
@@ -57,7 +60,7 @@ public class MainDebat {
 			debat.afficheGraphe();
 			
 			debat.affichageMenuContradiction(scanner);
-			debat.affichageMenuSolution();
+			debat.affichageMenuSolution(scanner);
 		}
 		scanner.close();
 
