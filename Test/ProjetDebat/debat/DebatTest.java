@@ -4,15 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Scanner;
 
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import ProjetDebat.file.FichierDebat;
-import up.mi.jgm.util.UtilMath;
 
 
 
@@ -34,35 +31,54 @@ class DebatTest {
 	void setUp() throws Exception {
 	}
 
-	//@Test
-	@ParameterizedTest
-	@ValueSource(ints = {6,9,1000})
-	void testDemanderNbArgument(int nbTest) {
-		Scanner scanner = new Scanner(Integer.toString(nbTest));
-		Debat.demanderNombreArgument(scanner);
-		
-	}
-	@ParameterizedTest
-	@ValueSource(ints = {0,-1,-2193})
-	void testWrongValue (int value) {
-		Scanner scanner = new Scanner(Integer.toString(value));
-		assertThrows(Exception.class, () -> { Debat.demanderNombreArgument(scanner);})  ;
-	}
-	
 
 	@ParameterizedTest
-	@ValueSource(ints = {2})
-	void testAffichageContradiction(int choix) {
+	@ValueSource(ints = {6,9,1000,0,-1,-2193})
+	void testDemanderNbArgument(int nbTest) {
+		Scanner scanner = new Scanner(Integer.toString(nbTest));
+		if (nbTest<=0) {
+			assertThrows(Exception.class, () -> { Debat.demanderNombreArgument(scanner);})  ;
+		}
+		else {
+			Debat.demanderNombreArgument(scanner);
+		}
 		
-		Scanner scanner1 = new Scanner(Integer.toString(choix));
-		Scanner scanner = new Scanner(System.in);
+		
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"-1\n1\n\n2\n3\n\n2\n","-1\ne\n\n1\n3\n\n3\n3\n1\n2\n"})
+	void testAffichageMenuContradiction(String inputs) {
+		
+
+		Scanner scanner = new Scanner(inputs);
 		debatNbArg.affichageMenuContradiction(scanner);
 	}
-//	@Test
-//	void testAjouterContradiction() {
-//		Scanner scanner1 = new Scanner("1");
-//		Scanner scanner2 = new Scanner("2");
-//		debatNbArg.ajouterContradiction(scanner1);
-//	}
+	
+	void testAfficheGraphe() {
+		debatFile.afficheGraphe();
+	}
+	void testAfficheArguments() {
+		debatFile.afficheArguments(debatFile.getListArguments());
+		debatNbArg.afficheArguments(debatNbArg.getListArguments());
+	}
+	
+	@ParameterizedTest
+	@ValueSource(strings = {"-1\n1\n\n2\n3\n\n2\n\n4\n3\n1\n3\n1\n\n1\n4,d\nBonjour\n-0.2\n4"})
+	void testAffichageMenuSolution(String inputs) {
+		
+
+		Scanner scanner = new Scanner(inputs);
+		debatNbArg.affichageMenuSolution(scanner);
+	}
+	
+	@ParameterizedTest
+	@ValueSource(strings = {"1\n1\n1\n1\n1\n1\n1\n2\\n2\n2\n2\n2\n2\n2\n3\nTestSave\n4,d\nBonjour\n-0.2\n4\n4 "})
+	void testAffichageMenuRechercheSolution(String inputs) {
+
+		Scanner scanner = new Scanner(inputs);
+		debatFile.affichageMenuRechercheSolution(scanner,false);
+		debatFile.getRs();
+	}
 
 }
