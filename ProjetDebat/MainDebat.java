@@ -37,7 +37,12 @@ public class MainDebat {
 			System.out.println(args[0]+"\n");
 			FichierDebat fd = new FichierDebat(args[0]);
 			fd.lireFichier();
-			fd.creerGrapheFichier();
+			try {
+				fd.creerGrapheFichier();
+			} catch (Exception e) {
+				System.exit(0);
+			}
+			System.out.println("\nLecture " +args[0]+ " réussie.\n");
 			Debat debat = new Debat(fd.getGrapheArg());
 			debat.afficheGraphe();
 			if (choix == 'Y') {

@@ -13,7 +13,7 @@ import ProjetDebat.graphe.*;
  *
  * @author Ethan & Lathan
  */
-public class FichierDebat {
+public class FichierDebat extends Exception {
 
 	private String contenu ;
 	private String nameFile;
@@ -60,7 +60,7 @@ public class FichierDebat {
     /**
      * permet de créer un graphe à partir du contenu du fichier
      */
-	public void creerGrapheFichier() {
+	public void creerGrapheFichier() throws Exception{
 		
 		Scanner scanner = new Scanner(contenu);
 		boolean lireArgument = true;
@@ -94,10 +94,12 @@ public class FichierDebat {
 							}
 						}catch (ExceptionFileDebat e) {
 							System.out.println(e.getMessage());
-							System.exit(0);
+							throw e;
+							//System.exit(0);
 						}catch (IndexOutOfBoundsException e) {
 							System.out.println("Erreur Fichier lecture.\nFin du programme.");
-							System.exit(0);
+							throw e;
+							//System.exit(0);
 						}
 						
 						
@@ -134,7 +136,9 @@ public class FichierDebat {
 						
 					} catch (ExceptionFileDebat e) {
 						System.out.println(e.getMessage());
-						System.exit(0);
+						throw e;
+						//return;
+						//System.exit(0);
 					}
 					System.out.println("Création de l'argument "+nomArg1);
 					arg = new Argument(nomArg1.toString());
@@ -149,8 +153,12 @@ public class FichierDebat {
 				nomArg1.delete(0, nomArg1.length());
 				nomArg2.delete(0, nomArg2.length());
 				try {
+					if (line.length()<9) {
+						throw new ExceptionFileDebat("Erreur Fichier dans la création des contradictions, ligne incorrecte, "
+								+ "veuillez corriger votre fichier.\n\nFin du programme");
+					}
 					if (line.substring(0, 9).equals("argument(")) {
-						throw new ExceptionFileDebat("Erreur Fichier dans la création des contradictions, pas d'argument après qu'une "
+						throw new ExceptionFileDebat("\nErreur Fichier dans la création des contradictions, pas d'argument après qu'une "
 								+ "contradiction ait été entré, "
 								+ "veuillez corriger votre fichier.\n\nFin du programme");
 
@@ -199,7 +207,12 @@ public class FichierDebat {
 						
 					} catch (ExceptionFileDebat e) {
 						System.out.println(e.getMessage());
-						System.exit(0);
+						throw e;
+						//System.exit(0);
+					}
+					catch (IndexOutOfBoundsException e) {
+						System.out.println("Erreur lecture fichier, une ligne est incorrecte");
+						throw e;
 					}
 					
 					System.out.println("Création de la contradiction : "+ nomArg1 + " contredit "+nomArg2);
@@ -221,7 +234,9 @@ public class FichierDebat {
 						}
 					} catch (ExceptionFileDebat e) {
 						System.out.println(e.getMessage());
-						System.exit(0);
+						throw e;
+						//return;
+						//System.exit(0);
 					}
 
 					
@@ -229,7 +244,9 @@ public class FichierDebat {
 				
 				} catch (ExceptionFileDebat e) {
 					System.out.println(e.getMessage());
-					System.exit(0);
+					throw e;
+					//return;
+					//System.exit(0);
 				}
 				
 			}
@@ -257,7 +274,7 @@ public class FichierDebat {
 	public void ajouterContradiction(Argument A1, Argument A2) {
 		try {
 			if (!(grapheArg.getGraphe().keySet().contains(A1)) || !(grapheArg.getGraphe().keySet().contains(A2)) ) {
-				throw new ExceptionFileDebat("Erreur Fichier dans création de contradictions, une contradiction a été entrée"
+				throw new ExceptionFileDebat("Erreur Fichier dans la création de contradictions, une contradiction a été entrée"
 						+ "avec un argument qui n'a pas été créé.\nFin du programme");
 			}
 		} catch (ExceptionFileDebat e) {
