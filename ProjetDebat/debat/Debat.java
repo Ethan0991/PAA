@@ -34,24 +34,10 @@ public class Debat {
 	private String cheminFichier = "";
 	private Set<Argument> derniereSolution = null ;
 	
-    // Dans le cas ou on veut rentrer d'autres noms pour les args
-    /**
-     * Construit un débat en fonction d'une liste passée en paramètre
-     * Version 1:    permet de choisir vos propres noms pour les arguments
-     *
-     * @param listArgument est une liste regroupant l'ensemble des arguments utlisés dans ce débat
-     */
-	public Debat(List<Argument> listArguments) {
-		
-		this.listArguments = listArguments;
-		grapheArg = new Graphe(listArguments);
-		solutionPotentielle = new HashSet<Argument>();
-	}
-	
-    // Dans le cas où on a un graphe de départ
+
     /**
     * Construit un débat en fonction d'un graphe passé en paramètre
-    * Version 2:le nom des arguments provient de du graphe passé en paramètre
+    * Version 1:le nom des arguments provient de du graphe passé en paramètre
     *
     * @param grapheArg est un graphe à partir duquel nous allons construire un débat
     */
@@ -67,7 +53,7 @@ public class Debat {
     // Dans le cas ou on initialise A1,A2,AN automatiquement
     /**
     * Construit un débat en fonction d'un nombre en paramètre
-    * Version 3:    le nom des arguments est choisi automatiquement A1,A2,...,AN
+    * Version 2:    le nom des arguments est choisi automatiquement A1,A2,...,AN
     *
     * @param nbArg est un nombre correspondant à l'ensemble des arguments utlisés dans ce débat
     */
@@ -300,9 +286,10 @@ public class Debat {
 	}
 
     /**
-     * Fonction qui laisse à l'utlisateur le choix de l'interface graphique et présente le menu des solutions ainsi que de permettre à l'utlisateur de chosir une des options disponibles
+     * Méthode affichant le menu de la recherche de solution et qui permet d'afficher une solution admissible, une solution préféree,
+     * sauvegarder un fichier ou quitter le programme
      *
-     *@param affichageGraphique est un boolean servant à conserver le choix de l'utlisateur
+     *@param boolean affichageGraphique indique si l'utilisateur a choisit l'affichage graphique
      */
 	public void affichageMenuRechercheSolution(Scanner sc,boolean affichageGraphique) {
 
@@ -420,7 +407,7 @@ public class Debat {
 
 
 	/**
-	 * permet d'ajouter un argument dans la collection solutionPotentielle si elle n'y figure pas 
+	 * Permet l'ajout d'un argument dans la liste de solutionPotentielle
 	 * 
 	 * @param sc un objet de type scanner pour recevoir les input de l'utilisateur
 	 */
